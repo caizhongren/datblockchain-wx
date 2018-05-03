@@ -1,0 +1,14 @@
+<view class="container">
+  <view class="profile-info" bindtap="goLogin">
+    <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+    <view class="info">
+       <text class="name">{{userInfo.nickName}}</text> 
+    </view>
+  </view>
+
+  <view class="user-menu">
+    <view class="weui-cells__title">权限账户</view>
+    <navigator class="navigator user">{{powerInfo}}</navigator>
+  </view>
+  <view class="logout" bindtap="exitLogin">退出当前权限账户</view>
+</view>

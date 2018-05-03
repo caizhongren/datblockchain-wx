@@ -1,0 +1,76 @@
+<view class="add-vaccine">
+    <view class="add-form">
+        <view class="form-item">
+          <radio-group bindchange="radioChange" class="group-type">
+            <radio value="4" name="selectType" checked="{{register.selectType==4}}" class='radio-type'>耳标</radio>
+            <radio value="3" name="selectType" checked="{{register.selectType==3}}" class='radio-type'>耳缺</radio>
+            <radio value="2" name="selectType" checked="{{register.selectType==2}}" class='radio-type'>栏号</radio>
+            <radio value="1" name="selectType" checked="{{register.selectType==1}}" >全部</radio>
+          </radio-group>
+        </view>
+        <view class="form-item" wx:if="{{register.selectType==2}}">
+            <!-- 栏号:<textarea class="input" bindinput="bindinputColumnCode" value="{{register.columnCode}}" auto-focus auto-height="true"                    maxlength="200"/> -->
+            栏号:<input class="input" bindinput="bindinputColumnCode" value="{{register.columnCodes}}" auto-focus/>
+        </view>
+        <view class="form-item" wx:if="{{register.selectType==3}}">
+            耳缺:<input class="input" bindinput="bindinputEarNotch" value="{{register.earNotchs}}" auto-focus/>
+        </view>
+        <view class="scan_many" wx:if="{{register.selectType==4}}">
+            耳标:<view>{{register.earTags}}</view>
+            
+        </view>
+        <view class="form-item" wx:if="{{register.selectType==4}}">
+          <button class="scan" bindtap="earTabAdd">扫一扫</button>
+        </view>
+        <view class="section"> 
+          <picker bindchange="bindPickerChange" value="{{varietiesIndex}}" range="{{varietiesArr}}">  
+              <view class="picker">  
+                疫苗:{{register.vaccine}}  
+              </view>  
+          </picker>
+        </view> 
+        <view class="form-item">
+            疫苗编号:<input class="input" bindinput="bindinputSource" value="{{register.vaccineCode}}"/>
+        </view> 
+        <view class="section">  
+          <picker mode="date" value="{{date}}" start="2010-01-01" end="2090-1-1" bindchange="bindDateChange">  
+            <view class="picker">  
+              接种日期: {{register.vaccineTime}}  
+            </view>  
+          </picker>  
+        </view>
+        
+    </view>
+    <view wx:if="{{register.selectType==4}}">
+        使用指南：耳标是猪耳朵上的二维码，疫苗接种时可以针对单头种猪进行接种记录。扫一扫二维码，可以录入多头猪的信息一起提交。
+    </view>
+    <view wx:if="{{register.selectType==3}}">
+        使用指南：耳缺即耳号，疫苗接种时可以针对单头种猪进行接种记录。手动输入猪的耳标信息，即可录入疫苗信息，如需要多头录入则可以输入多个耳缺以空         格隔开。例如：123 445 
+    </view>
+    <view wx:if="{{register.selectType==2}}">
+        使用指南：为便捷批量化操作，可以直接输入栏号信息，系统将记录栏中所有猪的接种疫苗信息，如有多栏，则可以输入多个栏号以空格
+        隔开。例如：123 445 
+    </view>
+    <view wx:if="{{register.selectType==1}}">
+        使用指南：所有种猪都会记录此疫苗的接种信息。如小批量接种疫苗，可以勾选栏号或耳缺耳标，进行小批量录入。 
+    </view>
+    <view class="btns">
+        <button class="cannel" bindtap="cancelAddress">取消</button>
+        <button class="save" bindtap="saveAddress">保存</button>
+    </view>
+
+    <view class="region-select" wx:if="{{openSelectRegion}}">
+      <view class="hd">
+        <view class="region-selected">
+          <view class="item {{item.id == 0 ? 'disabled' : ''}} {{(regionType -1) === index ? 'selected' : ''}}" bindtap="selectRegionType" data-region-type-index="{{index}}" wx:for="{{selectRegionList}}" wx:key="id">{{item.name}}</view>
+        </view>
+        <view class="done {{selectRegionDone ? '' : 'disabled'}}" bindtap="doneSelectRegion">确定</view>
+      </view>
+      <view class="bd">
+      <scroll-view scroll-y class="region-list">
+        <view class="item {{item.selected ? 'selected' : ''}}" bindtap="selectRegion" data-region-index="{{index}}" wx:for="{{regionList}}" wx:key="id">{{item.name}}</view>
+      </scroll-view>
+      </view>
+    </view>
+</view>
+<view class="bg-mask" bindtap="cancelSelectRegion" wx:if="{{openSelectRegion}}"></view>

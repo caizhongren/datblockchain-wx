@@ -1,0 +1,34 @@
+<view class="add-vaccine">
+  <view class="form-item">
+    <view class='view_two'>
+      耳缺:{{register.earNotch}}
+    </view>
+    <view wx:if="{{register.pigGender == 0}}" class='view_two'>
+      性别：公猪
+    </view>
+    <view wx:else class='view_two'>
+      性别：母猪
+    </view>
+  </view>
+  <view class="form-item">
+    <view class='view_two'>品种:{{register.varieties}}</view>
+    <view class='view_two'>出生日期:{{register.birth}}</view>
+  </view>
+  <view class="form-item">
+    当前栏号: {{register.columnCode}}
+  </view>
+  <view class="add-form">
+    <view class="form-item">
+        目标栏号:<input class="input" bindinput="bindIsColumnCode" value="{{columnCode}}" auto-focus/>
+    </view>
+  </view>
+  <view>
+    使用指南：输入目标栏号进行转栏操作。
+  </view>
+  <view class="btns">
+    <button class="cannel" bindtap="cancelAddress">取消</button>
+    <button class="save" bindtap="saveAddress">保存</button>
+  </view>
+  </view>
+  
+  

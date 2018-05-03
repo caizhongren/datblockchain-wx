@@ -1,0 +1,52 @@
+<view class="container">
+    <view class='totle'>
+      共{{total}}条疫苗记录
+      <view class="tr bg-w">
+        <view class="th">接种时间</view>
+        <view class="th">疫苗名称</view>
+        <!-- <view class="th">疫苗编号</view> -->
+        <view class="th ">方式</view>
+        <view class="th ">具体值</view>
+      </view>
+    </view>
+    <view class="address-list" wx:if="{{ vaccineList.length > 0 }}">
+        <view class="table">
+        <view class="tr_top bg-w"></view>
+          <block wx:for="{{vaccineList}}" wx:key="{{id}}">
+            <view class="tr bg-g" wx:if="{{index % 2 == 0}}" bindtap="" data-address-id="{{item.id}}">
+              <view class="td">{{item.vaccineTime}}</view>
+              <view class="td">{{item.vaccine}}</view>
+              <!-- <view class="td">{{item.vaccineCode}}</view> -->
+              <view class="td" wx:if="{{ item.selectType == 1 }}">全部</view>
+              <view class="td" wx:if="{{ item.selectType == 2 }}">栏号</view>
+              <view class="td" wx:if="{{ item.selectType == 3 }}">耳缺</view>
+              <view class="td" wx:if="{{ item.selectType == 4 }}">耳标</view>
+              <view class="td" wx:if="{{ item.selectType == 1 }}">全部种猪</view>
+              <view class="td" wx:if="{{ item.selectType == 2 }}">{{item.columnCodes}}</view>
+              <view class="td" wx:if="{{ item.selectType == 3 }}">{{item.earNotchs}}</view>
+              <view class="td" wx:if="{{ item.selectType == 4 }}">{{item.earTags}}</view>
+            </view>
+            <view class="tr" wx:else bindtap="" data-address-id="{{item.id}}">
+              <view class="td">{{item.vaccineTime}}</view>
+              <view class="td">{{item.vaccine}}</view>
+              <!-- <view class="td">{{item.vaccineCode}}</view> -->
+              <view class="td" wx:if="{{ item.selectType == 1 }}">全部</view>
+              <view class="td" wx:if="{{ item.selectType == 2 }}">栏号</view>
+              <view class="td" wx:if="{{ item.selectType == 3 }}">耳缺</view>
+              <view class="td" wx:if="{{ item.selectType == 4 }}">耳标</view>
+              <view class="td" wx:if="{{ item.selectType == 1 }}">全部种猪</view>
+              <view class="td" wx:if="{{ item.selectType == 2 }}">{{item.columnCodes}}</view>
+              <view class="td" wx:if="{{ item.selectType == 3 }}">{{item.earNotchs}}</view>
+              <view class="td" wx:if="{{ item.selectType == 4 }}">{{item.earTags}}</view>
+            </view>
+          </block>
+        </view>
+
+
+    </view>
+    <view class="empty-view" wx:if="{{ vaccineList.length <= 0 }}">
+      <image class="icon" src=""></image>
+      <text class="text">还没有种猪疫苗记录</text>
+    </view>
+    <view class="add-vaccine" bindtap="vaccineAddOrUpdate" data-address-id="0">新增疫苗记录</view>
+</view>

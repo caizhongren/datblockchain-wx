@@ -1,0 +1,35 @@
+<view class="container">
+    <view class='totle'>
+      共{{total}}头母猪已生产
+      <view class="tr bg-w">
+        <view class="th">耳缺</view>
+        <view class="th">分娩时间</view> 
+        <view class="th ">个体识别</view>
+      </view>
+    </view>
+    <view class="address-list" wx:if="{{ vaccineList.length > 0 }}">
+        <view class="table">
+        <view class="tr_top bg-w"></view>
+          <block wx:for="{{vaccineList}}" wx:key="{{id}}">
+            <view class="tr bg-g" wx:if="{{index % 2 == 0}}" bindtap="" data-address-id="{{item.id}}">
+              <view class="td">{{item.earNotch}}</view>
+              <view class="td">{{item.preproductionTime}}</view>
+              <view class="td"><image catchtap="selectPig" data-sow="{{item.id}}" data-column="{{item.columnCode}}" class="del" src="/static/images/ic_menu_me_pressed.png"></image></view> 
+            </view>
+            <view class="tr" wx:else bindtap="" data-address-id="{{item.id}}">
+              <view class="td">{{item.earNotch}}</view>
+              <view class="td">{{item.preproductionTime}}</view> 
+              <view class="td"><image catchtap="selectPig" data-sow="{{item.id}}" data-column="{{item.columnCode}}" class="del" src="/static/images/ic_menu_me_pressed.png"></image></view>
+            </view>
+          </block>
+        </view>
+
+
+    </view>
+    <view class="empty-view" wx:if="{{ vaccineList.length <= 0 }}">
+      <image class="icon" src=""></image>
+      <text class="text">还没有已生产母猪</text>
+    </view>
+    <view class="add-vaccine" bindtap="earNotchEnter" data-address-id="0">耳缺/耳标手动录入</view>
+    <!-- <view class="add-vaccine_right" bindtap="matingList" data-address-id="0">已识别列表</view>  -->
+</view>

@@ -1,0 +1,59 @@
+<view class="add-vaccine">
+    <view class="form-item">
+      <view class='view_two'>母猪耳缺:{{register.sowEarNotch}}</view>
+      <view class='view_two'>分娩时间:{{register.childbirthTime}}</view>  
+    </view>
+    <view class="form-item">
+        <view class='view_two'>活仔数:{{register.aliveNumber}}</view>
+        <view class='view_two'>窝号:{{register.id}}</view>
+    </view>
+    <view class="add-form">
+       <scroll-view class='socr-inner' scroll-y="true">
+        <block wx:for="{{piglets}}" wx:key="{{index}}">
+          <view>{{index+1}}</view>
+          <view class="form-item">
+            <radio-group bindchange="radioChange" class='group-type' data-index="{{index}}">
+              <radio value="0" name="pigGender" checked="{{item.pigGender==0}}" class='radio-type'>公</radio>
+              <radio value="1" name="pigGender" checked="{{item.pigGender==1}}">母</radio>
+            </radio-group>
+          </view>
+          <view class="form-item">
+              耳缺:<input class="input" bindinput="bindinputEarNotch" value="{{item.earNotch}}" data-index="{{index}}" auto-focus/>
+          </view>
+          <view class="form-item">
+              耳标:<view>{{item.earTag}}</view><button class="scan" bindtap="earTagAdd" data-index="{{index}}">扫一扫</button>
+          </view>
+          <view class='many-line'></view>
+        </block>
+      </scroll-view>
+        <view class="section"> 
+          <picker bindchange="bindPickerChange" value="{{varietiesIndex}}" range="{{varietiesArr}}">  
+              <view class="picker">  
+                品种:{{varieties}}
+              </view>  
+          </picker>
+        </view>
+    </view>
+    <view>
+        使用指南：录入小猪耳缺和耳标信息。
+    </view>
+    <view class="btns">
+        <button class="cannel" bindtap="cancelAddress">取消</button>
+        <button class="save" bindtap="saveAddress">保存</button>
+    </view>
+
+    <view class="region-select" wx:if="{{openSelectRegion}}">
+      <view class="hd">
+        <view class="region-selected">
+          <view class="item {{item.id == 0 ? 'disabled' : ''}} {{(regionType -1) === index ? 'selected' : ''}}" bindtap="selectRegionType" data-region-type-index="{{index}}" wx:for="{{selectRegionList}}" wx:key="id">{{item.name}}</view>
+        </view>
+        <view class="done {{selectRegionDone ? '' : 'disabled'}}" bindtap="doneSelectRegion">确定</view>
+      </view>
+      <view class="bd">
+      <scroll-view scroll-y class="region-list">
+        <view class="item {{item.selected ? 'selected' : ''}}" bindtap="selectRegion" data-region-index="{{index}}" wx:for="{{regionList}}" wx:key="id">{{item.name}}</view>
+      </scroll-view>
+      </view>
+    </view>
+</view>
+<view class="bg-mask" bindtap="cancelSelectRegion" wx:if="{{openSelectRegion}}"></view>

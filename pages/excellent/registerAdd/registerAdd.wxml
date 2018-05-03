@@ -1,0 +1,68 @@
+<view class="add-address">
+    <view class="add-form">
+        <view class="form-item">
+          <radio-group bindchange="radioChange" class='group-type'>
+            <radio value="0" name="pigGender" checked="{{register.pigGender==0}}" class='radio-type'>公</radio>
+            <radio value="1" name="pigGender" checked="{{register.pigGender==1}}">母</radio>
+          </radio-group>
+        </view>
+        <view class="form-item">
+            栏号:<input class="input" bindinput="bindinputColumnCode" value="{{register.columnCode}}" auto-focus/>
+        </view>
+        <view class="form-item">
+            耳缺:<input class="input" bindinput="bindinputEarNotch" value="{{register.earNotch}}" auto-focus/>
+        </view>
+        <view class="form-item">
+            耳标:<view>{{register.earTag}}</view><button class="scan" bindtap="earTabAdd">扫一扫</button>
+        </view>
+        <!-- <view class="form-item">
+            <input class="input" bindinput="bindinputMobile" value="{{address.mobile}}" placeholder=""/>
+        </view> -->
+        
+        <view class="section"> 
+          <picker bindchange="bindPickerChange" value="{{varietiesIndex}}" range="{{varietiesArr}}">  
+              <view class="picker">  
+                品种:{{register.varieties}}  
+              </view>  
+          </picker>
+        </view>  
+
+        <!-- <view class="form-item">
+            重量(kg):<input  type="number" class="input" bindinput='bindinputWeight' value="{{register.weight}}"/>
+        </view> -->
+        <view class="section">  
+          <picker mode="date" value="{{date}}" start="2010-01-01" end="2090-1-1" bindchange="bindDateChange">  
+            <view class="picker">  
+              出生日期: {{register.birth}}  
+            </view>  
+          </picker>  
+        </view>
+        <view class="form-item">
+            <!-- 来源:<input class="input" value="{{address.provinceName +  address.cityName + address.areaName}}" disabled="true" bindtap="chooseRegion"/> -->
+            说明:<input class="input" bindinput="bindinputSource" value="{{register.source}}"/>
+        </view>
+        <!-- <view class="form-default">
+            <text bindtap="bindIsDefault" class="default-input {{address.isDefault == 1 ? 'selected' : ''}}">默认</text>
+        </view> -->
+    </view>
+
+    <view class="btns">
+        <button class="cannel" bindtap="cancelAddress">取消</button>
+        <button class="save" bindtap="saveAddress">保存</button>
+    </view>
+
+    <view class="region-select" wx:if="{{openSelectRegion}}">
+      <view class="hd">
+        <view class="region-selected">
+          <view class="item {{item.id == 0 ? 'disabled' : ''}} {{(regionType -1) === index ? 'selected' : ''}}" bindtap="selectRegionType" data-region-type-index="{{index}}" wx:for="{{selectRegionList}}" wx:key="id">{{item.name}}</view>
+        </view>
+        <view class="done {{selectRegionDone ? '' : 'disabled'}}" bindtap="doneSelectRegion">确定</view>
+      </view>
+      <view class="bd">
+      <scroll-view scroll-y class="region-list">
+        <view class="item {{item.selected ? 'selected' : ''}}" bindtap="selectRegion" data-region-index="{{index}}" wx:for="{{regionList}}" wx:key="id">{{item.name}}</view>
+      </scroll-view>
+      </view>
+    </view>
+</view>
+<view class="bg-mask" bindtap="cancelSelectRegion" wx:if="{{openSelectRegion}}"></view>

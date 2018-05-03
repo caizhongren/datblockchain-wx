@@ -1,0 +1,126 @@
+<view class="add-vaccine">
+  <view class="form-item">
+    <view wx:if="{{register.matingType == 1}}" class='view_two'>
+      配种方式:人工授精
+    </view>
+    <view wx:else class='view_two'>
+      配种方式:自然交配
+    </view>
+    <view class='view_two'>配种日期: {{register.matingTime}}</view>
+  </view>
+  <view class="form-item">
+    <view class='view_two'>
+      母猪耳缺:{{register.sowEarNotch}}
+    </view>
+    <view class='view_two'>
+      母猪胎次:{{register.parity}}
+    </view>
+  </view>
+  <view class="form-item">
+    <view class='view_two'>公猪耳缺:{{register.boarEarNotch}}</view>
+    <view class='view_two'>公猪次数:{{register.boarNumber}}</view>
+  </view>
+  <view class="form-item">
+    预产日期: {{register.preproductionTime}}
+  </view>
+  <view class="add-form">
+    <view class="form-item-update">
+      <radio-group bindchange="radioChange" class="group-type">
+        <radio value="0" name="childbirthState" checked="{{childbirthState==0}}" class='radio-type'>正常</radio>
+        <radio value="1" name="childbirthState" checked="{{childbirthState==1}}">流产</radio>
+      </radio-group>
+    </view>
+    <view wx:if="{{childbirthState == 0}}">
+      <view class="section">  
+        <picker mode="date" value="{{date}}" start="2010-01-01" end="2090-1-1" bindchange="bindDateChange">  
+          <view class="picker">  
+            分娩日期: {{childbirthTime}}  
+          </view>  
+        </picker>  
+      </view>
+      <view class="form-item-update">
+        <view class='name'>仔数：</view>
+        <view class="tui-gallery-list">
+          <view class="tui-number-group">
+            <button class="tui-number-cell" bindtap="nextNum1" disabled='{{disabled1}}'>-</button>
+            <input class="tui-number-cell" type="number" value='{{pigletNumber}}'></input>
+            <button class="tui-number-cell" bindtap="prevNum1" disabled='{{disabled2}}'>+</button>
+          </view>
+        </view>
+      </view>
+      <view class='form-item-group'>
+        <view class="left">
+        其中：
+        </view>
+        <view class="right">
+          <view class="inner">
+            <view class='name'>活仔数：</view>
+            <view class="tui-gallery-list">
+              <view class="tui-number-group">
+                <button class="tui-number-cell" bindtap="nextNum2" disabled='{{disabled3}}'>-</button>
+                <input class="tui-number-cell" type="number" value='{{aliveNumber}}'></input>
+                <button class="tui-number-cell" bindtap="prevNum2" disabled='{{disabled4}}'>+</button>
+              </view>
+            </view>
+          </view>
+          <view class="inner">
+            <view class='name'>木乃伊：</view>
+            <view class="tui-gallery-list">
+              <view class="tui-number-group">
+                <button class="tui-number-cell" bindtap="nextNum3" disabled='{{disabled5}}'>-</button>
+                <input class="tui-number-cell" type="number" value='{{mummyNumber}}'></input>
+                <button class="tui-number-cell" bindtap="prevNum3" disabled='{{disabled6}}'>+</button>
+              </view>
+            </view>
+          </view>
+          <view class="inner">
+            <view class='name'>溺 仔：</view>
+            <view class="tui-gallery-list">
+              <view class="tui-number-group">
+                <button class="tui-number-cell" bindtap="nextNum4" disabled='{{disabled7}}'>-</button>
+                <input class="tui-number-cell" type="number" value='{{drowningNumber}}'></input>
+                <button class="tui-number-cell" bindtap="prevNum4" disabled='{{disabled8}}'>+</button>
+              </view>
+            </view>
+          </view>
+          <view class="inner">
+            <view class='name'>死 胎：</view>
+            <view class="tui-gallery-list">
+              <view class="tui-number-group">
+                <button class="tui-number-cell" bindtap="nextNum5" disabled='{{disabled9}}'>-</button>
+                <input class="tui-number-cell" type="number" value='{{stillbirthNumber}}'></input>
+                <button class="tui-number-cell" bindtap="prevNum5" disabled='{{disabled10}}'>+</button>
+              </view>
+            </view>
+          </view>
+
+        </view>
+      </view>
+    </view>
+    <view wx:else>
+      
+    </view>
+  </view>
+  <view>
+    使用指南：猪仔数要和猪仔详细状态个数对应。
+  </view>
+  <view class="btns">
+    <button class="cannel" bindtap="cancelAddress">取消</button>
+    <button class="save" bindtap="saveAddress">保存</button>
+  </view>
+
+  <view class="region-select" wx:if="{{openSelectRegion}}">
+    <view class="hd">
+      <view class="region-selected">
+        <view class="item {{item.id == 0 ? 'disabled' : ''}} {{(regionType -1) === index ? 'selected' : ''}}" bindtap="selectRegionType" data-region-type-index="{{index}}" wx:for="{{selectRegionList}}" wx:key="id">{{item.name}}</view>
+      </view>
+      <view class="done {{selectRegionDone ? '' : 'disabled'}}" bindtap="doneSelectRegion">确定</view>
+    </view>
+    <view class="bd">
+      <scroll-view scroll-y class="region-list">
+        <view class="item {{item.selected ? 'selected' : ''}}" bindtap="selectRegion" data-region-index="{{index}}" wx:for="{{regionList}}" wx:key="id">{{item.name}}</view>
+      </scroll-view>
+    </view>
+  </view>
+</view>
+<view class="bg-mask" bindtap="cancelSelectRegion" wx:if="{{openSelectRegion}}"></view>

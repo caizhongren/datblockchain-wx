@@ -1,0 +1,38 @@
+
+<!--index.wxml-->
+<!-- <view class="container"> -->
+<view class="page">
+   <!-- <view class="a-section a-brand">
+    <view class="h">
+      <navigator url="../brand/brand">
+        <text class="txt">通知</text>
+      </navigator>
+    </view>
+    <view class="b">
+      <view class="item item-1" wx:for="{{powers}}" wx:key="id">
+        <navigator url="{{item.route}}">
+          <view class="wrap">
+            <image class="img" src="{{item.icon}}" mode="aspectFill"></image>
+            <view class="mt">
+              <text class="brand">{{item.name}}</text>
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+  </view>  -->
+    <view class="page__hd">
+        <view class="page__title">通知</view>
+        <view class="page__desc">重要通知</view>
+    </view>
+    <view class="page__bd">
+        <view class="weui-grids">
+            <block wx:for="{{powers}}" wx:item="*this" wx:key="id">
+                <navigator url="{{item.route}}" class="weui-grid" hover-class="weui-grid_active">
+                    <image class="weui-grid__icon" src="{{item.icon}}" />
+                    <view class="weui-grid__label">{{item.name}}</view>
+                </navigator>
+            </block>
+        </view>
+    </view>
+</view>
